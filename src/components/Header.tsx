@@ -1,41 +1,192 @@
-import { Link, useRouterState } from '@tanstack/react-router'
+import { useState, useEffect, useRef } from 'react'
+import { Link } from '@tanstack/react-router'
 import { ThemeToggle } from './ThemeToggle'
 
-export function Header() {
-  const router = useRouterState()
-  const path = router.location.pathname
+const navItems = [
+  { label: 'Home', to: '/' },
+  { label: 'Menu', to: '/menu' },
+  { label: 'Our Story', to: '/about' },
+]
 
-  const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/menu', label: 'Menu' },
-    { to: '/about', label: 'Our Story' },
-  ]
+export function Header() {
+  const [isMobile, setIsMobile] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const menuRef = useRef(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false)
+      }
+    }
+
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false)
+      }
+    }
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.removeEventListener(
+        'mousedown',
+        handleClickOutside
+      )
+      document.removeEventListener(
+        'touchstart',
+        handleClickOutside
+      )
+    }
+  }, [])
 
   return (
     <header className="header">
       <div className="header__inner">
         <Link to="/" className="header__logo">
-          🎂 Good <span className="header__logo-accent">Cake</span> Bakery
+          🎂 Good{' '}
+          <span className="header__logo-accent">
+            Cake
+          </span>{' '}
+          Bakery
         </Link>
 
-        <nav className="header__nav">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              {...(path === link.to ? { 'data-active': true } : {})}
+        {!isMobile ? (
+          <>
+            <nav
+              style={{
+                display: 'flex',
+                gap: '0.75rem',
+                alignItems: 'center',
+              }}
             >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  activeProps={{
+                    style: {
+                      color: 'var(--primary)',
+                    },
+                  }}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'var(--text-muted)',
+                    fontWeight: 500,
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
 
-        <div className="header__actions">
-          <ThemeToggle />
-          <Link href="tel:+15038109369" className="btn btn--primary" style={{ fontSize: '0.82rem', padding: '8px 18px' }}>
-            Order Now
-          </Link>
-        </div>
+            <div className="header__actions">
+              <ThemeToggle />
+
+              <a
+                href="tel:+15038109369"
+                className="btn btn--primary"
+              >
+                Order Now
+              </a>
+            </div>
+          </>
+        ) : (
+          <div
+            ref={menuRef}
+            style={{ position: 'relative' }}
+          >
+            <button
+              onClick={() =>
+                setMenuOpen((prev) => !prev)
+              }
+              aria-label="Toggle menu"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontSize: '1.8rem',
+                cursor: 'pointer',
+                color: 'currentColor',
+                padding: 0,
+              }}
+            >
+              ☰
+            </button>
+
+            {menuOpen && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '55px',
+                  right: 0,
+                  width: '240px',
+                  background: 'var(--card)',
+                  border:
+                    '1px solid rgba(0,0,0,0.1)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow:
+                    '0 12px 40px rgba(0,0,0,0.15)',
+                  zIndex: 1000,
+                }}
+              >
+                {navItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() =>
+                      setMenuOpen(false)
+                    }
+                    style={{
+                      display: 'block',
+                      padding: '1rem',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      borderBottom:
+                        '1px solid rgba(0,0,0,0.06)',
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+
+                <div
+                  style={{
+                    padding: '1rem',
+                    borderBottom:
+                      '1px solid rgba(0,0,0,0.06)',
+                  }}
+                >
+                  <ThemeToggle />
+                </div>
+
+                <a
+                  href="tel:+15038109369"
+                  style={{
+                    display: 'block',
+                    margin: '0.75rem',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                  }}
+                  className="btn btn--primary"
+                >
+                  Order Now
+                </a>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </header>
   )
