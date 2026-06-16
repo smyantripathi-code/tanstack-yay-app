@@ -36,7 +36,7 @@ export function Footer() {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/menu">Our Menu</Link></li>
             <li><Link to="/about">Our Story</Link></li>
-            <li><Link to="/order">Order a Cake</Link></li>
+            <li><Link href="tel:+15038109369">Order a Cake</Link></li>
           </ul>
         </div>
 
