@@ -15,7 +15,7 @@ const MENU_CATEGORIES = [
       { name: 'Dulce de Leche Cake', desc: 'Rich caramel milk cake with whipped frosting — perfect for birthdays or any special occasion.', price: 'From $40', badge: '' },
       { name: 'Chocolate Cake', desc: 'Light, fluffy, and heavenly. Our chocolate layers are moist and deeply flavored.', price: 'From $40', badge: '' },
       { name: 'White Cake', desc: 'Classic white cake with wedding cake frosting. Often filled with pineapple, strawberry, or other fillings.', price: 'From $40', badge: '' },
-      { name: 'Gender Reveal Cake', desc: 'Custom colored inside with your choice of flavors and frosting. A moment you'll never forget.', price: 'Custom quote', badge: 'Popular' },
+      { name: 'Gender Reveal Cake', desc: 'Custom colored inside with your choice of flavors and frosting. A moment you will never forget.', price: 'Custom quote', badge: 'Popular' },
       { name: 'Wedding & Quinceañera Cakes', desc: 'Multi-tiered, elaborate custom designs. Jay brings the artistry and precision of a cake baker with 13+ years of experience.', price: 'Custom quote', badge: 'Made to Order' },
     ],
   },
