@@ -81,10 +81,10 @@ export function Header() {
                     },
                   }}
                   style={{
-                    textDecoration: 'none',
-                    color: 'var(--text-muted)',
-                    fontWeight: 500,
-                  }}
+  textDecoration: 'none',
+  color: '#fff',
+  fontWeight: 500,
+}}
                 >
                   {item.label}
                 </Link>
@@ -117,7 +117,7 @@ export function Header() {
                 border: 'none',
                 fontSize: '1.8rem',
                 cursor: 'pointer',
-                color: 'currentColor',
+                color: '#fff',
                 padding: 0,
               }}
             >
@@ -131,9 +131,10 @@ export function Header() {
                   top: '55px',
                   right: 0,
                   width: '240px',
-                  background: 'var(--card)',
-                  border:
-                    '1px solid rgba(0,0,0,0.1)',
+                  background: 'rgba(0, 0, 0, 0.35)',
+backdropFilter: 'blur(16px)',
+WebkitBackdropFilter: 'blur(16px)',
+border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow:
@@ -152,9 +153,9 @@ export function Header() {
                       display: 'block',
                       padding: '1rem',
                       textDecoration: 'none',
-                      color: 'inherit',
+                      color: '#fff',
                       borderBottom:
-                        '1px solid rgba(0,0,0,0.06)',
+  '1px solid rgba(255,255,255,0.08)',
                     }}
                   >
                     {item.label}
@@ -165,7 +166,7 @@ export function Header() {
                   style={{
                     padding: '1rem',
                     borderBottom:
-                      '1px solid rgba(0,0,0,0.06)',
+  '1px solid rgba(255,255,255,0.08)',
                   }}
                 >
                   <ThemeToggle />
