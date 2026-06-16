@@ -33,7 +33,7 @@ export function Header() {
 
         <div className="header__actions">
           <ThemeToggle />
-          <Link to="/order" className="btn btn--primary" style={{ fontSize: '0.82rem', padding: '8px 18px' }}>
+          <Link href="tel:+15038109369" className="btn btn--primary" style={{ fontSize: '0.82rem', padding: '8px 18px' }}>
             Order Now
           </Link>
         </div>
