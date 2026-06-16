@@ -9,7 +9,7 @@ export function ThemeToggle() {
   })
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'dark')
   }, [dark])
 
   return (
@@ -17,7 +17,7 @@ export function ThemeToggle() {
       className="theme-toggle"
       onClick={() => setDark((d) => !d)}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={dark ? 'Light mode' : 'Dark mode'}
+      title={dark ? 'dark mode' : 'Dark mode'}
     >
       {dark ? '☀️' : '🌙'}
     </button>
